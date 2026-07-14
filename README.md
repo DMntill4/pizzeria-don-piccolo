@@ -74,7 +74,9 @@ clientes ──1:N── pedidos ──1:N── pedido_detalle ──N:1── 
   `Entregado`. Es invocado automáticamente por el trigger `trg_pedido_entregado`.
 - **`sp_registrar_entrega(id_domicilio)`**: procedimiento de apoyo para registrar
   la hora de entrega de un domicilio (dispara los triggers correspondientes).
-
+- **`sp_registrar_salida(id_domicilio)`**: registra la hora de salida del
+  repartidor para un domicilio, completando el ciclo salida → entrega.
+  
 ## 5. Triggers
 
 1. **`trg_actualizar_stock`**: al insertar un `pedido_detalle`, descuenta del
@@ -86,6 +88,10 @@ clientes ──1:N── pedidos ──1:N── pedido_detalle ──N:1── 
 4. **`trg_pedido_entregado`**: al registrar `hora_entrega` en un domicilio,
    marca al repartidor como `Disponible` de nuevo y llama a
    `sp_marcar_pedido_entregado` para cerrar el pedido.
+5. **`trg_actualizar_total_detalle`**: recalcula `pedidos.total` automáticamente
+   cada vez que se agrega una pizza al pedido.
+6. **`trg_actualizar_total_envio`**: recalcula `pedidos.total` cuando se
+   registra o modifica el costo de envío del domicilio.
 
 ## 6. Vistas
 

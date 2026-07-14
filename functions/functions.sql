@@ -108,3 +108,18 @@ BEGIN
      WHERE id_domicilio = p_id_domicilio;
 END$$
 DELIMITER ;
+
+-- ---------------------------------------------------------------------
+-- PROCEDIMIENTO 3 (utilidad): sp_registrar_salida
+-- Registra la hora de salida del repartidor para un domicilio.
+-- ---------------------------------------------------------------------
+DROP PROCEDURE IF EXISTS sp_registrar_salida;
+
+DELIMITER $$
+CREATE PROCEDURE sp_registrar_salida(IN p_id_domicilio INT)
+BEGIN
+    UPDATE domicilios
+       SET hora_salida = NOW()
+     WHERE id_domicilio = p_id_domicilio;
+END$$
+DELIMITER ;
