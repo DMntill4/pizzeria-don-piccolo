@@ -64,7 +64,18 @@ clientes ──1:N── pedidos ──1:N── pedido_detalle ──N:1── 
               repartidores
 ```
 
-## 4. Funciones y procedimientos
+## 4. Evidencias visuales
+
+A continuación se muestran las evidencias del proyecto cargadas en la carpeta de imágenes:
+
+- Funciones y procedimientos: ![Funciones y procedimientos](images/proofs/functions.png)
+- Consultas: ![Consultas SQL](images/proofs/queries.png)
+- Esquema de la base de datos: ![Esquema](images/proofs/scheme.png)
+- Tablas: ![Tablas](images/proofs/tables.png)
+- Triggers: ![Triggers](images/proofs/triggers.png)
+- Vistas: ![Vistas](images/proofs/views.png)
+
+## 5. Funciones y procedimientos
 
 - **`fn_calcular_total_pedido(id_pedido)`**: suma el valor de las pizzas del
   pedido, agrega el costo de envío del domicilio asociado y aplica el 19% de IVA.
@@ -77,7 +88,7 @@ clientes ──1:N── pedidos ──1:N── pedido_detalle ──N:1── 
 - **`sp_registrar_salida(id_domicilio)`**: registra la hora de salida del
   repartidor para un domicilio, completando el ciclo salida → entrega.
   
-## 5. Triggers
+## 6. Triggers
 
 1. **`trg_actualizar_stock`**: al insertar un `pedido_detalle`, descuenta del
    stock de cada ingrediente la cantidad usada según la receta de la pizza.
@@ -93,7 +104,7 @@ clientes ──1:N── pedidos ──1:N── pedido_detalle ──N:1── 
 6. **`trg_actualizar_total_envio`**: recalcula `pedidos.total` cuando se
    registra o modifica el costo de envío del domicilio.
 
-## 6. Vistas
+## 7. Vistas
 
 - **`vista_resumen_pedidos_cliente`**: nombre del cliente, cantidad de pedidos
   y total gastado.
@@ -102,7 +113,7 @@ clientes ──1:N── pedidos ──1:N── pedido_detalle ──N:1── 
 - **`vista_stock_bajo`**: ingredientes cuyo stock actual está por debajo del
   mínimo permitido.
 
-## 7. Ejemplos de consultas (ver `consultas.sql`)
+## 8. Ejemplos de consultas (ver `consultas.sql`)
 
 ```sql
 -- Pizzas más vendidas
@@ -142,7 +153,7 @@ SELECT * FROM vista_stock_bajo;
 CALL sp_registrar_entrega(1);
 ```
 
-## 8. Instrucciones para ejecutar el script
+## 9. Instrucciones para ejecutar el script
 
 Requisitos: MySQL 8.0+ (o MariaDB 10.3+) y un cliente como `mysql` CLI,
 MySQL Workbench o similar.
