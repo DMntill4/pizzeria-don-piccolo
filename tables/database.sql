@@ -55,14 +55,8 @@ CREATE TABLE pizza_ingredientes (
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
--- Tabla: repartidores
+-- Tabla: repartidores (archivo exanen)
 -- ---------------------------------------------------------------------
-CREATE TABLE repartidores (
-    id_repartidor  INT AUTO_INCREMENT PRIMARY KEY,
-    nombre         VARCHAR(100) NOT NULL,
-    zona_asignada  VARCHAR(50) NOT NULL,
-    estado         ENUM('Disponible','No disponible') DEFAULT 'Disponible'
-) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
 -- Tabla: pedidos
@@ -91,19 +85,9 @@ CREATE TABLE pedido_detalle (
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
--- Tabla: domicilios
+-- Tabla: domicilios (archivo examen)
 -- ---------------------------------------------------------------------
-CREATE TABLE domicilios (
-    id_domicilio   INT AUTO_INCREMENT PRIMARY KEY,
-    id_pedido      INT NOT NULL UNIQUE,
-    id_repartidor  INT,
-    hora_salida    DATETIME,
-    hora_entrega   DATETIME,
-    distancia_km   DECIMAL(6,2),
-    costo_envio    DECIMAL(10,2),
-    FOREIGN KEY (id_pedido) REFERENCES pedidos(id_pedido) ON DELETE CASCADE,
-    FOREIGN KEY (id_repartidor) REFERENCES repartidores(id_repartidor)
-) ENGINE=InnoDB;
+
 
 -- ---------------------------------------------------------------------
 -- Tabla: pagos
@@ -156,12 +140,6 @@ INSERT INTO pizza_ingredientes (id_pizza, id_ingrediente, cantidad_requerida) VA
 (2, 1, 1), (2, 2, 200), (2, 3, 100), (2, 5, 60), (2, 6, 40),
 (3, 1, 1), (3, 2, 250), (3, 3, 120), (3, 4, 60), (3, 5, 40);
 
-INSERT INTO repartidores (nombre, zona_asignada, estado) VALUES
-('Jorge Ramírez', 'Norte', 'Disponible'),
-('Pedro Suárez', 'Sur', 'Disponible');
-
 -- Pedido de ejemplo
 INSERT INTO pedidos (id_cliente, metodo_pago, estado) VALUES (1, 'Efectivo', 'Pendiente');
 INSERT INTO pedido_detalle (id_pedido, id_pizza, cantidad, precio_unitario) VALUES (1, 1, 2, 35000);
-INSERT INTO domicilios (id_pedido, id_repartidor, distancia_km, costo_envio)
-VALUES (1, 1, 4.5, 6000);
